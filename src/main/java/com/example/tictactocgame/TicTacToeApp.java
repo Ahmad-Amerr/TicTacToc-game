@@ -74,6 +74,9 @@ public class TicTacToeApp extends Application {
         gameModes.setValue("Human vs Human");
         Button btnStartGame = new Button("Start Game");
         btnStartGame.setStyle("-fx-background-color: darkblue; -fx-text-fill: white;");
+        firstPlayerChoice = new ComboBox<>();
+        firstPlayerChoice.getItems().addAll("Player X", "Player O", "Random");
+        firstPlayerChoice.setValue("Player X");
         btnStartGame.setOnAction(e -> initializeGame());
         Label titleLabel = new Label("Tic-Tac-Toe Game start");
         titleLabel.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
@@ -82,6 +85,7 @@ public class TicTacToeApp extends Application {
                 new Label("Player O Name:"), secPlayerName,
                 new Label("Number of Rounds:"), numberOfRounds,
                 new Label("Game Mode:"), gameModes,
+                new Label("Who starts first?"), firstPlayerChoice,
                 btnStartGame);
         gameSettings.setAlignment(Pos.CENTER);
         gameSettings.setPadding(new Insets(10));
@@ -118,10 +122,7 @@ public class TicTacToeApp extends Application {
         VBox sidePanel = new VBox(10, playerFirstX,playerSecO,playerTurn, scoreLabel, roundLabel);
         sidePanel.setAlignment(Pos.CENTER);
         sidePanel.setPrefWidth(200);
-        firstPlayerChoice = new ComboBox<>();
-        firstPlayerChoice.getItems().addAll("Player X", "Player O", "Random");
-        firstPlayerChoice.setValue("Player X");
-        sidePanel.getChildren().addAll(new Label("Who starts first?"), firstPlayerChoice,startGameButton);
+        sidePanel.getChildren().addAll(startGameButton);
         return sidePanel;
     }
     private void startGame() {
@@ -167,6 +168,7 @@ public class TicTacToeApp extends Application {
     private void updateBoard(int row, int col) {
         currentPlayerName = game.getCurrentPlayer() == 'X' ?  playerNameX: playerNameO;
         buttons[row][col].setText(String.valueOf(game.getCurrentPlayer()));
+        currentPlayerName = game.getCurrentPlayer() == 'X' ?  playerNameO:playerNameX ;
         playerTurn.setText("Player " +currentPlayerName+ "'s turn");
     }
 
@@ -181,7 +183,8 @@ public class TicTacToeApp extends Application {
             endGame("Game is a draw!");
             return true;
         }
-        playerTurn.setText("Player " + game.getCurrentPlayer() + "'s turn");
+        currentPlayerName=game.getCurrentPlayer()=='X'?"O":"X";
+        playerTurn.setText("Player " +currentPlayerName + "'s turn");
         return false;
     }
 
