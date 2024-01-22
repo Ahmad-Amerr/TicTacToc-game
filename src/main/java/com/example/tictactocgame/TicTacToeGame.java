@@ -66,8 +66,6 @@ public class TicTacToeGame {
     }
     void updateButtonsWithScores(char[][] board, char player, Button[][] buttons) {
         MinimaxAIPlayer aiPlayer = new MinimaxAIPlayer();
-//        int alpha = Integer.MIN_VALUE;
-//        int beta = Integer.MAX_VALUE;
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
                 if (board[row][col] == '-') {
