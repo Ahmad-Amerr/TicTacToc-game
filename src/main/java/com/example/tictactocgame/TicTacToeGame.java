@@ -70,10 +70,11 @@ public class TicTacToeGame {
             for (int col = 0; col < 3; col++) {
                 if (board[row][col] == '-') {
                     board[row][col] = player;
-                    int score = aiPlayer.minimax(board, 0, false, player);
+                    int score = aiPlayer.minimax(board, false,player);
                     board[row][col] = '-';
                     buttons[row][col].setText("Score: " + score);
                 }
+
             }
         }
     }

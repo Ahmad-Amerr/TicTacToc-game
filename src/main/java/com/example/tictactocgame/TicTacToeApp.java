@@ -156,7 +156,7 @@ public class TicTacToeApp extends Application {
         PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
         String currentGameMode=getGameModeChoice();
         if (game.getCurrentPlayer() == 'O' && "Human vs AI (Random)".equals(currentGameMode) || "Human vs AI (Minimax)".equals(currentGameMode)) {
-            performAIMove();
+            aIMove();
         }
         pause.play();
     }
@@ -188,12 +188,12 @@ public class TicTacToeApp extends Application {
         return false;
     }
 
-    private void performAIMove() {
+    private void aIMove() {
         String gameMode = gameModes.getValue();
         int[] aiMove;
             if ("Human vs AI (Random)".equals(gameMode)) {
                 RandomPlayer aiRandomMove = new RandomPlayer();
-                aiMove = aiRandomMove.random_option(game.getBoard());
+                aiMove = aiRandomMove.random_option(game.getBoard(),currentPlayer);
             } else if ("Human vs AI (Minimax)".equals(gameMode)) {
                 game.updateButtonsWithScores(game.getBoard(), game.getCurrentPlayer(),buttons);
                 MinimaxAIPlayer aiAdvancedPlayer = new MinimaxAIPlayer();

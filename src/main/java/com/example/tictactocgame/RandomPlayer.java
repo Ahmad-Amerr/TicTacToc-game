@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 public class RandomPlayer {
-    public int[] random_option(char[][] board) {
+    public int[] random_option(char[][] board, String currentPlayer) {
         List<int[]> emptyMoves = new ArrayList<>();
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
@@ -17,7 +17,8 @@ public class RandomPlayer {
         if (emptyMoves.isEmpty()) {
             return null;
         }
-        int[] move = emptyMoves.get(new Random().nextInt(emptyMoves.size()));
+        Random random = new Random();
+        int[] move = emptyMoves.get(random.nextInt(emptyMoves.size()));
         return move;
     }
 }
